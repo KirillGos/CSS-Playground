@@ -66,7 +66,7 @@ button {
   padding: 15px;
   max-width: 40vw;
   align-self: center;
-  justify-self:center;
+  justify-self: center;
   margin: 20px 0;
   border-radius: 30px;
   animation: example 2s ease-in-out;
@@ -80,7 +80,7 @@ button {
   min-height: 70vh;
   max-height: 70vh;
   align-self: center;
-  justify-self:center;
+  justify-self: center;
 }
 .to-do-app-title {
   font-size: 25px;
@@ -124,11 +124,19 @@ button {
   width: 100%;
   /* background: radial-gradient(rgba(231, 255, 19, 0.416), rgba(25, 62, 195, 0.371)); */
   color: darkblue;
-  background:-o-repeating-linear-gradient(yellow, blue);
+  background: -o-repeating-linear-gradient(yellow, blue);
   padding: 5px;
   border-radius: 7px;
   border: 1px solid rgba(0, 0, 0, 0.329);
- }
+}
+.task-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  color: black;
+  align-self: center;
+}
+
 .to-do-app-form {
   margin-bottom: 20px;
 }
@@ -136,7 +144,7 @@ button {
   display: flex;
   gap: 10px;
   flex-direction: column;
-  overflow-y:scroll;
+  overflow-y: scroll;
   height: 45vh;
 }
 .task-list::-webkit-scrollbar {
@@ -147,7 +155,6 @@ button {
   display: flex;
   gap: 10px;
 }
-
 
 @keyframes example {
   0% {
@@ -199,10 +206,9 @@ button {
   gap: 30px;
   margin-top: 20px;
   padding: 30px 15px;
-  min-height: 40vh; 
+  min-height: 40vh;
   align-self: center;
-  justify-self:center;
-
+  justify-self: center;
 }
 
 .changeCSSBtn {

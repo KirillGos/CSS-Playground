@@ -12,6 +12,7 @@ const colors = [
   "brown",
   "blue",
 ];
+
 const cssProperties = {
   setFont: {
     property: "font-family",
@@ -153,7 +154,7 @@ function HomePage() {
         </div>
       </div> 
 
-      <div class="to-do-app" > 
+      <div class="to-do-app"> 
         <h1 class='to-do-app-title'>To Do App</h1>
           <div class="to-do-app-form">
             <label for="to-do-app-input">Enter a task:</label>
@@ -162,41 +163,82 @@ function HomePage() {
           </div>
           <div class="task-list">
           </div>
-      </div>
-      `;
+          </div>
+          `;
 }
 function randomIdGenerator() {
   return (Math.random() * 50 + Math.random() * 100).toString();
 }
-function TaskItem(text) {
-  if (text.length > 20) {
-    alert("Too much text");
-    return false;
-  }
-
-  if (text.length === 0) {
-    alert("Enter text");
-    return false;
-  }
-  const taskItem = crtEl("div", "task-item", randomIdGenerator());
+function TaskItem({ text, id, isChecked }) {
+  const taskItem = crtEl("div", "task-item", id);
   const taskRight = crtEl("div", "task-right");
-  const input = crtEl("input", "task-checkbox", "", "checkbox");
+  const checkBox = crtEl("input", "task-checkbox", "", "checkbox");
   const taskText = crtEl("div", "task-text");
-
-  taskRight.append(input, taskText);
+  taskText.textContent = text;
+  if(isChecked === true) {
+    taskText.style = "text-decoration: line-through;";
+    checkBox.checked = true;
+  }
+  taskRight.append(checkBox, taskText);
 
   const taskAction = crtEl("div", "task-action task-left");
   const editTaskBtn = crtEl("button", "task-edit-action", "", "", "Edit");
   const delTaskBtn = crtEl("button", "task-delete-action", "", "", "X");
+
+  editTaskBtn.addEventListener("click", (e) => editTask(e));
+  delTaskBtn.addEventListener("click", (e) => deleteTask(e));
+  checkBox.addEventListener('click', (e) => checkTask(e))
+
   taskAction.append(editTaskBtn, delTaskBtn);
-
   taskItem.append(taskRight, taskAction);
-  return {taskItem, taskText};
+  return taskItem;
 }
-
+function checkTask(e) {
+  const taskId = e.target.parentElement.parentElement.id;
+  const tasksArr = JSON.parse(localStorage.tasks);
+  let index;
+   tasksArr.forEach((item, i) => {
+    if (item.id === taskId) {
+      index = i;
+    }
+  });
+  tasksArr[index].isChecked = !tasksArr[index].isChecked;
+  localStorage.tasks = JSON.stringify(tasksArr);
+  loadTasks();
+}
+function editTask(e) {
+  const taskId = e.target.parentElement.parentElement.id;
+  const taskTextInput = findElement("to-do-app-input", "#");
+  let index;
+  const theTask = JSON.parse(localStorage.tasks).filter((item, i) => {
+    if (item.id === taskId) {
+      index = i;
+      return item;
+    }
+  });
+  taskTextInput.value = theTask[0].text;
+  const tasksArr = JSON.parse(localStorage.tasks)
+  tasksArr.splice(index, 1);
+  localStorage.setItem('tasks', JSON.stringify(tasksArr));
+  loadTasks();  
+}
+function deleteTask(e) {
+  const taskId = e.target.parentElement.parentElement.id;
+  const tasksArr = JSON.parse(localStorage.tasks)
+  let index;
+    const theTask = JSON.parse(localStorage.tasks).filter((item, i) => {
+    if (item.id === taskId) {
+      index = i;
+      return item;
+    }
+  });
+  tasksArr.splice(index, 1);
+  localStorage.setItem('tasks', JSON.stringify(tasksArr));
+  loadTasks();  
+}
 function crtEl(tagName, className, id, type, text) {
   const item = document.createElement(tagName);
-  if (className?.length > 0) {    
+  if (className?.length > 0) {
     item.setAttribute("class", className);
   }
   if (id?.length > 0) {
@@ -211,18 +253,40 @@ function crtEl(tagName, className, id, type, text) {
   return item;
 }
 
-
 function addTaskFunc(inputEl) {
   const taskTextInput = inputEl.value;
-  const taskObj = TaskItem(taskTextInput);
-  if (taskObj == false) {
-    inputEl.value = "";
-    return;
+  if (taskTextInput.length > 30) {
+    alert("Too much text");
+    return false;
   }
+  if (taskTextInput.length === 0) {
+    alert("Enter text");
+    return false;
+  }
+  if (localStorage.tasks == undefined) {
+    localStorage.tasks = "[]";
+  }
+  const taskItem = JSON.parse(localStorage.tasks);
+  taskItem.push({ text: taskTextInput, id: randomIdGenerator(), isChecked: false });
+  localStorage.setItem("tasks", JSON.stringify(taskItem));
+
   const taskList = findElement("task-list", ".");
-  taskObj.taskText.textContent = taskTextInput;
-  taskList.append(taskObj.taskItem);
+  taskList.innerHTML = "";
+  taskItem.forEach((item) => {
+    taskList.append(TaskItem(item));
+  });
   inputEl.value = "";
+}
+function loadTasks() {
+  if (localStorage.tasks == undefined) {
+    localStorage.tasks = "[]";
+  }
+  const taskItem = JSON.parse(localStorage.tasks);
+  const taskList = findElement("task-list", ".");
+  taskList.innerHTML = ""
+  taskItem.forEach((item) => {
+    taskList.append(TaskItem(item));
+  });
 }
 
 function addThroughEnter() {
@@ -254,7 +318,7 @@ function Layouts() {
   </div>
   `;
 }
-renderElemenet(HomePage);
+
 function populateCircles(item) {
   return `<div class="layout-wrapper" draggable='true' style=${
     "background-color:" + item
@@ -285,6 +349,7 @@ function Tables() {
 function Animations() {
   return `Animations`;
 }
+// links section
 
 links.forEach((link) => {
   link.addEventListener("click", () => handleLinkClick(link));
@@ -301,9 +366,16 @@ function handleLinkClick(link) {
       ? Tables()
       : Animations();
 
-  i === 1 ? addThroughEnter() : null;
+  if (i === 1) {
+    addThroughEnter();
+    loadTasks();
+  }
 }
 function renderElemenet(element) {
   mainPage.innerHTML = element();
 }
-document.body.onload = addThroughEnter();
+document.body.onload = () => {
+  renderElemenet(HomePage);
+  addThroughEnter();
+  loadTasks();
+};
