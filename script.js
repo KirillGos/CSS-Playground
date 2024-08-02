@@ -87,7 +87,9 @@ function changeCSS(prop) {
 function HomePage() {
   mainPage.classList = "";
   mainPage.classList.add("homepage-style");
-  return `<div class="homepage-css-area">
+  return `
+    <div class="homepage-left">
+  <div class="homepage-css-area" draggable="true" ondragover="dragOverFunc(event)" ondrop="mainPageDrag(event)"  ondragstart="changeDragged(this)">
         <h1 class="hPTitle">CSS is very powerful</h1>
         <div class="cssPowerGrid">
           <div class="cssPowerBox">
@@ -152,8 +154,9 @@ function HomePage() {
           </div>
         </div>
       </div> 
-
-      <div class="to-do-app"> 
+      </div>
+      <div class="homepage-right">
+      <div class="to-do-app"  draggable="true"  ondragover="dragOverFunc(event)" ondrop="mainPageDrag(event)" ondragstart="changeDragged(this)"> 
         <h1 class='to-do-app-title'>To Do App</h1>
           <div class="to-do-app-form">
             <p for="to-do-app-input">Enter a task:</p>
@@ -163,6 +166,7 @@ function HomePage() {
             </span>
           </div>
           <div class="task-list">
+          </div>
           </div>
           </div>
           `;
@@ -256,7 +260,7 @@ function crtEl(tagName, className, id, type, text) {
 
 function addTaskFunc(inputEl) {
   const taskTextInput = inputEl.value;
-  if (taskTextInput.length > 30) {
+  if (taskTextInput.length > 37) {
     alert("Too much text");
     return false;
   }
@@ -342,8 +346,8 @@ function dropFunc(event) {
     ? event.target.prepend(dragged)
     : null;
 }
-function changeDragged(e) {
-  dragged = e;
+function changeDragged(event) {
+  dragged = event;
 }
 function dragOverFunc(event) {
   event.preventDefault();
@@ -384,3 +388,26 @@ document.body.onload = () => {
   addThroughEnter();
   loadTasks();
 };
+
+function mainPageDrag(event) {
+  const mainPageRight = findElement("homepage-right", ".");
+  const mainPageLeft = findElement("homepage-left", ".");
+  const cssArea = findElement("homepage-css-area", ".");
+  const toDoApp = findElement("to-do-app", ".");
+
+  if (dragged.classList.contains("homepage-css-area")) {
+    if (toDoApp.parentElement.classList.contains("homepage-right")) {
+      mainPageRight.prepend(cssArea);
+      mainPageLeft.prepend(toDoApp);
+    } else {
+      mainPageRight.prepend(toDoApp);
+      mainPageLeft.prepend(cssArea);
+    }
+  } else if (dragged.parentElement.classList.contains("homepage-right")) {
+    mainPageRight.prepend(cssArea);
+    mainPageLeft.prepend(toDoApp);
+  } else {
+    mainPageRight.prepend(toDoApp);
+    mainPageLeft.prepend(cssArea);
+  }
+}

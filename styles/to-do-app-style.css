@@ -1,10 +1,11 @@
 /* homepage todo app */
 .to-do-app {
-  background: radial-gradient(rgb(255, 255, 0), rgb(0, 0, 255));
+  background: radial-gradient(
+    rgba(253, 253, 63, 0.844),
+    rgba(29, 29, 213, 0.745)
+  );
   border-radius: 20px;
   padding: 1.8rem;
-  align-self: center;
-  justify-self: center;
   min-width: 40vw;
 }
 .to-do-app-form-el {
@@ -61,9 +62,7 @@
   justify-content: space-between;
   padding: 0.5rem;
   width: 100%;
-  /* background: radial-gradient(rgba(231, 255, 19, 0.416), rgba(25, 62, 195, 0.371)); */
   color: white;
-  background: -o-repeating-linear-gradient(yellow, blue);
   border-radius: 7px;
   border: 1px solid rgba(0, 0, 0, 0.329);
 }
