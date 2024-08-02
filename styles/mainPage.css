@@ -1,0 +1,87 @@
+/* homepage */
+.homepage-style {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-row: 2/3;
+  position: relative;
+}
+
+@media screen and (max-width: 700px) {
+  .homepage-style {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .to-do-app {
+    padding: 1rem;
+    min-width: 75vw;
+    min-height: 30vh;
+  }
+  .homepage-css-area {
+    max-width: 80vw;
+    max-height: none;
+
+    padding: 0.6rem;
+  }
+  .navigation {
+    width: 100%;
+  }
+  .cssPowerGrid {
+    padding: 1rem;
+  }
+  .navLink {
+    margin-left: 0;
+  }
+  .navLinks {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  footer {
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  * {
+    font-size: large;
+  }
+  body {
+    font-size: 10rem !important;
+    grid-template-rows: 0.5fr 4fr 0.4fr;
+  }
+  .navigation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .navLinks {
+    gap: 15px;
+  }
+  .homepage-css-area {
+    max-height: none;
+  }
+  .cssPowerGrid {
+    grid-template-columns: 1fr;
+  }
+  .to-do-app {
+    margin-bottom: 5px;
+    min-height: 70vh;
+  }
+  .to-do-app-form {
+    display: flex;
+
+    flex-direction: column;
+    gap: 5px;
+  }
+  .to-do-app {
+    width: 80vw;
+    height: 50vh;
+  }
+}

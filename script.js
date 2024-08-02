@@ -87,8 +87,7 @@ function changeCSS(prop) {
 function HomePage() {
   mainPage.classList = "";
   mainPage.classList.add("homepage-style");
-  return `<div class="homepage-wrapper">
-  
+  return `<div class="homepage-css-area">
         <h1 class="hPTitle">CSS is very powerful</h1>
         <div class="cssPowerGrid">
           <div class="cssPowerBox">
@@ -122,7 +121,7 @@ function HomePage() {
             </button>
           </div>
           <div class="cssPowerBox">
-            <p id="changeDecorationP">You can change the text decoration</p>
+            <p id="changeDecorationP">You can change text weight</p>
             <button
               id="textDecoration"
               class="changeCSSBtn"
@@ -157,9 +156,11 @@ function HomePage() {
       <div class="to-do-app"> 
         <h1 class='to-do-app-title'>To Do App</h1>
           <div class="to-do-app-form">
-            <label for="to-do-app-input">Enter a task:</label>
-            <input type='text' placeholder="add a task" id='to-do-app-input' />
-            <button class="submit-a-task" onClick="addTaskFunc(previousElementSibling)">Add</button>
+            <p for="to-do-app-input">Enter a task:</p>
+            <span class="to-do-app-form-el">
+              <input type='text' placeholder="add a task" id='to-do-app-input' />
+              <button class="submit-a-task" type="button" onClick="addTaskFunc(previousElementSibling)">Add</button>
+            </span>
           </div>
           <div class="task-list">
           </div>
@@ -175,7 +176,7 @@ function TaskItem({ text, id, isChecked }) {
   const checkBox = crtEl("input", "task-checkbox", "", "checkbox");
   const taskText = crtEl("div", "task-text");
   taskText.textContent = text;
-  if(isChecked === true) {
+  if (isChecked === true) {
     taskText.style = "text-decoration: line-through;";
     checkBox.checked = true;
   }
@@ -187,7 +188,7 @@ function TaskItem({ text, id, isChecked }) {
 
   editTaskBtn.addEventListener("click", (e) => editTask(e));
   delTaskBtn.addEventListener("click", (e) => deleteTask(e));
-  checkBox.addEventListener('click', (e) => checkTask(e))
+  checkBox.addEventListener("click", (e) => checkTask(e));
 
   taskAction.append(editTaskBtn, delTaskBtn);
   taskItem.append(taskRight, taskAction);
@@ -197,7 +198,7 @@ function checkTask(e) {
   const taskId = e.target.parentElement.parentElement.id;
   const tasksArr = JSON.parse(localStorage.tasks);
   let index;
-   tasksArr.forEach((item, i) => {
+  tasksArr.forEach((item, i) => {
     if (item.id === taskId) {
       index = i;
     }
@@ -217,24 +218,24 @@ function editTask(e) {
     }
   });
   taskTextInput.value = theTask[0].text;
-  const tasksArr = JSON.parse(localStorage.tasks)
+  const tasksArr = JSON.parse(localStorage.tasks);
   tasksArr.splice(index, 1);
-  localStorage.setItem('tasks', JSON.stringify(tasksArr));
-  loadTasks();  
+  localStorage.setItem("tasks", JSON.stringify(tasksArr));
+  loadTasks();
 }
 function deleteTask(e) {
   const taskId = e.target.parentElement.parentElement.id;
-  const tasksArr = JSON.parse(localStorage.tasks)
+  const tasksArr = JSON.parse(localStorage.tasks);
   let index;
-    const theTask = JSON.parse(localStorage.tasks).filter((item, i) => {
+  const theTask = JSON.parse(localStorage.tasks).filter((item, i) => {
     if (item.id === taskId) {
       index = i;
       return item;
     }
   });
   tasksArr.splice(index, 1);
-  localStorage.setItem('tasks', JSON.stringify(tasksArr));
-  loadTasks();  
+  localStorage.setItem("tasks", JSON.stringify(tasksArr));
+  loadTasks();
 }
 function crtEl(tagName, className, id, type, text) {
   const item = document.createElement(tagName);
@@ -267,7 +268,11 @@ function addTaskFunc(inputEl) {
     localStorage.tasks = "[]";
   }
   const taskItem = JSON.parse(localStorage.tasks);
-  taskItem.push({ text: taskTextInput, id: randomIdGenerator(), isChecked: false });
+  taskItem.push({
+    text: taskTextInput,
+    id: randomIdGenerator(),
+    isChecked: false,
+  });
   localStorage.setItem("tasks", JSON.stringify(taskItem));
 
   const taskList = findElement("task-list", ".");
@@ -283,7 +288,7 @@ function loadTasks() {
   }
   const taskItem = JSON.parse(localStorage.tasks);
   const taskList = findElement("task-list", ".");
-  taskList.innerHTML = ""
+  taskList.innerHTML = "";
   taskItem.forEach((item) => {
     taskList.append(TaskItem(item));
   });
