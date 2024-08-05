@@ -1,0 +1,23 @@
+.header {
+    opacity: 15px;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 10vh;
+}
+
+.header_title {
+    font-size: 2rem;
+    color: lightgoldenrodyellow;
+}
+
+.header-btn {
+    font-size: 1.4rem;
+    border-radius: 20px;
+    color: #fff;
+    background: transparent;
+    padding: 10px;
+}

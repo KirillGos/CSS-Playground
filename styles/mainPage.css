@@ -2,13 +2,51 @@
 .homepage-style {
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr 1fr;
+  justify-content: end;
+  grid-template-columns: repeat(1fr, 2);
+  grid-template-rows: repeat(1fr, 3);
+  height: 300vh;
   grid-row: 2/3;
 }
-.homepage-right,
-.homepage-left {
+.home-page-description {
+  color: #fff;
+  display: flex;
+  max-width: 50vw;
+  max-height: 50vh;
+  padding: 0 2rem ;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+}
+.homepage-to-do-app_description h1,
+.homepage-css-power_description h1 {
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+
+.homepage-to-do-app_description {
+  justify-content: end;
+}
+.homepage-to-do,
+.homepage-css-power {
   align-self: center;
   justify-self: center;
+}
+.homepage-to-do-app_description {
+  grid-row: 2 / 3;
+  grid-column: 2  /3;
+}
+.homepage-css-power_description {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+.homepage-to-do {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+.homepage-css-area {
+  grid-column: 2/ 3;
+  grid-row: 1 / 2;
 }
 @media screen and (max-width: 700px) {
   .homepage-style {

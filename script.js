@@ -84,14 +84,22 @@ function changeCSS(prop) {
     keyCopy.property + ":" + keyCopy.values[count(valuesLength)]
   }`;
 }
+
 function HomePage() {
   mainPage.classList = "";
   mainPage.classList.add("homepage-style");
+
   return `
-    <div class="homepage-left">
-  <div class="homepage-css-area" draggable="true" ondragover="dragOverFunc(event)" ondrop="mainPageDrag(event)"  ondragstart="changeDragged(this)">
-        <h1 class="hPTitle">CSS is very powerful</h1>
-        <div class="cssPowerGrid">
+  <div class="homepage-css-power_description home-page-description">
+    <div class="css-power-description_container">
+    <h1>CSS is very powerful</h1>
+    <p>A website without css is boring and sad. CSS adds life and creates a pleasant user experience in a website. The diagram on the left demonstrates some basic properties of css.</p>
+    </div>
+  </div>
+    <div class="homepage-css-power">
+  <div class="homepage-css-area" draggable="true" ondragover="dragOverFunc(event)" ondrop="mainPageDrag(event)"   ondragstart="changeDragged(this)">
+        <h1class="hPTitle">CSS is very powerful</h1>
+        <div class="cssPowerGrid">  
           <div class="cssPowerBox">
             <p id="changeFontText">You can set font family</p>
             <button
@@ -155,7 +163,13 @@ function HomePage() {
         </div>
       </div> 
       </div>
-      <div class="homepage-right">
+       <div class="homepage-to-do-app_description home-page-description">
+        <div class="homepage-to-do-app_descript-container">
+          <h1>To Do App</h1>
+           <p>I couldn't resist adding a classic to-do-app. To do app is one of the first apps I've ever build. This to-do-app has all the basic functuanality. Also this app uses localStorage to store your todo's on your web-browser</p>
+        </div>
+       </div>
+      <div class="homepage-to-do">
       <div class="to-do-app"  draggable="true"  ondragover="dragOverFunc(event)" ondrop="mainPageDrag(event)" ondragstart="changeDragged(this)"> 
         <h1 class='to-do-app-title'>To Do App</h1>
           <div class="to-do-app-form">
@@ -169,8 +183,87 @@ function HomePage() {
           </div>
           </div>
           </div>
+
+          <div class="tick-tack-toe_container">
+             <h1 class="tick-tack-toe_title">Tick Tack Toe</h1>
+             <h2 class="tick-tack-toe-sign_title">
+              Sign: <span class="tick-tack-toe-sign">X</span>
+             </h2>
+            <div class="tick-tack-toe_gameboard">
+             <div class="tick-tack-toe_area" data-index="0" onClick="tickTackClick(event)"></div>
+             <div class="tick-tack-toe_area" data-index="1" onClick="tickTackClick(event)"></div>
+             <div class="tick-tack-toe_area" data-index="2" onClick="tickTackClick(event)"></div>
+             <div class="tick-tack-toe_area" data-index="3" onClick="tickTackClick(event)"></div>
+             <div class="tick-tack-toe_area" data-index="4" onClick="tickTackClick(event)"></div>
+             <div class="tick-tack-toe_area" data-index="5" onClick="tickTackClick(event)"></div>
+             <div class="tick-tack-toe_area" data-index="6" onClick="tickTackClick(event)"></div>
+             <div class="tick-tack-toe_area" data-index="7" onClick="tickTackClick(event)"></div>
+              <div class="tick-tack-toe_area" data-index="8" onClick="tickTackClick(event)"></div>
+             </div
+          </div>
+
+          <div class="tick-tack-toe_description  home-page-description">
+          <h1>Tick Tack Toe</h1>
+           <p> Simple tick tack toe game. Play with someone or play against a robot.
+           </p>
+          </div>
           `;
 }
+let sign = "X";
+const tickTack = [null, null, null, null, null, null, null, null, null];
+
+function tickTackClick(e) {
+  if (e.target.textContent == "") {
+    const tickTackToeSignTitle = document.querySelector(".tick-tack-toe-sign");
+    e.target.textContent = sign;
+    let i = e.target.dataset.index;
+    tickTack.splice(i, 1, sign);
+    sign = sign === "X" ? "O" : "X";
+    tickTackToeSignTitle.textContent = sign;
+    e.target.dataset.sign = sign;
+    checkForTickTackToeWinner();
+  }
+}
+
+function checkForTickTackToeWinner() {
+  const winningComb = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [7, 5, 3],
+    [1, 5, 9],
+    [1, 4, 7],
+    [2, 5, 8],
+    [3, 6, 9],
+  ];
+  winningComb.forEach((item) => {
+    console.log(tickTack)
+    if (tickTack[item[0] - 1] !== null) {
+      if (tickTack[item[1] - 1] !== null) {
+        if (tickTack[item[2] - 1] !== null) {
+          tickTack[item[0] - 1] === tickTack[item[1] - 1] &&
+          tickTack[item[0] - 1] === tickTack[item[2] - 1]
+            ? tickTackToeGameOver()
+            : null;
+        }
+      }
+    }
+  });
+}
+
+function tickTackToeGameOver() {
+  tickTack.map((item, index) => tickTack.splice(index, 1, null));
+  alert(`winner is ${sign == "X" ? "O" : "X"}`);
+  sign = "X";
+  document.querySelector('.tick-tack-toe-sign').textContent = sign;
+  clearTTTBoard();
+}
+
+function clearTTTBoard() {
+  const areas = document.querySelectorAll(".tick-tack-toe_area");
+  areas.forEach((item) => (item.textContent = ""));
+}
+
 function randomIdGenerator() {
   return (Math.random() * 50 + Math.random() * 100).toString();
 }
@@ -366,7 +459,7 @@ links.forEach((link) => {
 
 function handleLinkClick(link) {
   const i = +link.dataset.index;
-  mainPage.innerHTML =
+  let html =
     i === 1
       ? HomePage()
       : i === 2
@@ -374,6 +467,7 @@ function handleLinkClick(link) {
       : i === 3
       ? Tables()
       : Animations();
+  mainPage.insertAdjacentHTML("afterbegin", html);
 
   if (i === 1) {
     addThroughEnter();
@@ -390,20 +484,20 @@ document.body.onload = () => {
 };
 
 function mainPageDrag(event) {
-  const mainPageRight = findElement("homepage-right", ".");
-  const mainPageLeft = findElement("homepage-left", ".");
+  const mainPageRight = findElement("homepage-to-do", ".");
+  const mainPageLeft = findElement("homepage-css-power", ".");
   const cssArea = findElement("homepage-css-area", ".");
   const toDoApp = findElement("to-do-app", ".");
 
   if (dragged.classList.contains("homepage-css-area")) {
-    if (toDoApp.parentElement.classList.contains("homepage-right")) {
+    if (toDoApp.parentElement.classList.contains("homepage-to-do")) {
       mainPageRight.prepend(cssArea);
       mainPageLeft.prepend(toDoApp);
     } else {
       mainPageRight.prepend(toDoApp);
       mainPageLeft.prepend(cssArea);
     }
-  } else if (dragged.parentElement.classList.contains("homepage-right")) {
+  } else if (dragged.parentElement.classList.contains("homepage-to-do")) {
     mainPageRight.prepend(cssArea);
     mainPageLeft.prepend(toDoApp);
   } else {

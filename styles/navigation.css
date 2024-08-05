@@ -9,20 +9,11 @@
   padding: 0 10px;
 }
 
-.logo {
-  font-style: italic;
-  cursor: pointer;
-  border-radius: 1.4rem;
-  margin: 0.7rem;
-  background: linear-gradient(rgb(216, 38, 38), rgb(59, 59, 198));
-  padding: 0.5rem;
-}
-
-.logo-title {
-  font-weight: 900;
-  word-wrap: none;
-  color: rgb(196, 212, 190);
-  font-size: 1.5rem;
+.logo img {
+  height: 100px;
+  width: auto;
+  border-radius: 100px;
+  margin: 1rem;
 }
 .navLink {
   list-style: none;

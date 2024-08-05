@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="./styles/navigation.css" />
     <link rel="stylesheet" href="./styles/mainPage.css" />
     <link rel="stylesheet" href="./styles/footer.css" />
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/tickTackToe.css" />
     <script src="./script.js" defer></script>
   </head>
   <body>
     <div class="navigation">
       <div class="logo">
-        <h1 class="logo-title">CSS PlayGround</h1>
+          <img src="logo.png" alt="logo">
       </div>
       <nav class="navLinks">
           <li class="navLink homePage" data-index="1">Home</li>
@@ -25,7 +27,11 @@
           <li class="navLink animationsPage" data-index="4">Animations</li>
       </nav>
     </div>
-    <div class="mainPage"></div>
+    <div class="header" id="\#home">
+        <div class="header_title">Welcome to the CSS Playground</div>
+        <button class="header-btn"><a href="\#css-power">Discover </a></button>
+    </div>
+    <div class="mainPage" id="css-power"></div>
     <footer class="footer">
       <span class="github-link">Github: <a href="https://github.com/KirillGos">KirillGos</a></span>
     </footer>
