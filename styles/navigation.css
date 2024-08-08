@@ -1,6 +1,6 @@
 /* Navigation Part */
 .navigation {
-  grid-row: 1/2;
+  height: 20vh; 
   width: 100%;
   display: flex;
   position: sticky;

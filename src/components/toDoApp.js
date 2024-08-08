@@ -1,6 +1,22 @@
-import '../styles/tickTackToe.css';
+import '../../styles/to-do-app-style.css';
 
-function addTaskFunc(inputEl) {
+const htmlTemplate =   `
+<div class="to-do-app"> 
+  <h1 class='to-do-app-title'>To Do App</h1>
+    <div class="to-do-app-form">
+      <p for="to-do-app-input">Enter a task:</p>
+      <span class="to-do-app-form-el">
+        <input type='text' placeholder="add a task" id='to-do-app-input' />
+        <button class="submit-a-task" type="button">Add</button>
+      </span>
+    </div>
+      <div class="task-list">
+      </div>
+    </div>
+`
+
+function addTaskFunc() {
+  const inputEl = document.querySelector('#to-do-app-input')
   const taskTextInput = inputEl.value;
   if (taskTextInput.length > 37) {
     alert("Too much text");
@@ -138,47 +154,16 @@ function deleteTask(e) {
 function randomIdGenerator() {
   return (Math.random() * 50 + Math.random() * 100).toString();
 }
-
-function TickTackToe() {
-    return `
-        <div class="homepage-to-do">
-      <div class="to-do-app"  draggable="true"  ondragover="dragOverFunc(event)" ondrop="mainPageDrag(event)" ondragstart="changeDragged(this)"> 
-        <h1 class='to-do-app-title'>To Do App</h1>
-          <div class="to-do-app-form">
-            <p for="to-do-app-input">Enter a task:</p>
-            <span class="to-do-app-form-el">
-              <input type='text' placeholder="add a task" id='to-do-app-input' />
-              <button class="submit-a-task" type="button" onClick="addTaskFunc(previousElementSibling)">Add</button>
-            </span>
-          </div>
-            <div class="task-list">
-            </div>
-          </div>
-          </div>
-
-          <div class="tick-tack-toe_container">
-            <div class='display-message-wrapper'>
-              <div class="display-mesage-ttt">
-                <h1 class="display-message_mode_title"></h1>
-                <button type="button" class="display-message_resetBtn" onClick="resetTTTGame()">Play Again</button>
-              </div>
-            </div>
-             <h1 class="tick-tack-toe_title">Tick Tack Toe</h1>
-             <h2 class="tick-tack-toe-sign_title">
-              Sign: <span class="tick-tack-toe-sign">X</span>
-             </h2>
-            <div class="tick-tack-toe_gameboard">
-             <div class="tick-tack-toe_area" data-index="0" onClick="tickTackClick(event)"></div>
-             <div class="tick-tack-toe_area" data-index="1" onClick="tickTackClick(event)"></div>
-             <div class="tick-tack-toe_area" data-index="2" onClick="tickTackClick(event)"></div>
-             <div class="tick-tack-toe_area" data-index="3" onClick="tickTackClick(event)"></div>
-             <div class="tick-tack-toe_area" data-index="4" onClick="tickTackClick(event)"></div>
-             <div class="tick-tack-toe_area" data-index="5" onClick="tickTackClick(event)"></div>
-             <div class="tick-tack-toe_area" data-index="6" onClick="tickTackClick(event)"></div>
-             <div class="tick-tack-toe_area" data-index="7" onClick="tickTackClick(event)"></div>
-              <div class="tick-tack-toe_area" data-index="8" onClick="tickTackClick(event)"></div>
-             </div
-          </div>
-          </div>
-    `
+function insertHtml(element, html) {
+  element.innerHTML = html;
+}
+export default  function ToDoApp() {
+  const homePageToDo = document.querySelector('.homepage-to-do');
+  insertHtml(homePageToDo, htmlTemplate);
+  
+  const btn = document.querySelector('.submit-a-task');
+  
+  btn.addEventListener('click', addTaskFunc);
+  addThroughEnter();
+  loadTasks();
 }
