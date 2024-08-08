@@ -8,7 +8,6 @@
   scroll-behavior: smooth;
 }
 
-  
 a {
   text-decoration: none;
   color: wheat;
@@ -18,8 +17,8 @@ body {
     circle at 3% 25%,
     #002853 0%,
     rgba(0, 40, 83, 1) 0%,
-    #040C18 100%
-  );    
+    #040c18 100%
+  );
 
   background: -webkit-radial-gradient(
     circle at 3% 25%,
@@ -54,5 +53,3 @@ button {
   cursor: pointer;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
-
-

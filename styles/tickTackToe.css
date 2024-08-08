@@ -1,34 +1,80 @@
 .tick-tack-toe_container {
-  min-width: 30vw;
-  min-height: 50vh;
+  width: 30vw;
+  color: white;
   display: flex;
   flex-direction: column;
-  background-color: rgb(255, 246, 246);
+  background: linear-gradient(
+    rgba(193, 42, 42, 0.849),
+    rgba(26, 26, 226, 0.789)
+  );
   grid-column: 2 / 3;
   grid-row: 3 / 4;
-  padding: 15px;
+  padding: 2rem;
   border-radius: 20%;
   text-align: center;
   justify-content: center;
   align-items: center;
-  margin: 1rem;
+  position: relative;
+}
+.tick-tack-toe_description {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+}
+.tick-tack-toe_description h1{
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+}
+.display-mesage-ttt {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgb(71, 196, 237);
+  height: 20vh;
+  border-radius: 15px;
+  padding: 15px;
+  width: 20vw;
+  gap: 1rem;
+  border: 1px solid black;
 }
 
+.display-message-wrapper {
+  display: none;
+  flex-direction: column;
+  color: black;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.3rem;
+  border-radius: 20%;
+  width: 100%;
+  position: absolute;
+  background-color: rgba(17, 199, 117, 0.238);
+}
 .tick-tack-toe_gameboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  background-color: lightblue;
   border: 1px solid black;
-  width: 30vw;
-  height: 40vh;
+  margin-top: 15px;
+  width: 25vw;
+  height: 25vw;
+}
+.display-message-wrapper button {
+  font-size: 1.4rem;
+  border-radius: 20px;
+  color: #fff;
+  background: transparent;
+  padding: 10px;
 }
 .tick-tack-toe_area {
-    border: 1px solid darkblue;
-    width: 100%;
-    font-size: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+  border: 1px solid darkblue;
+  width: 100%;
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }

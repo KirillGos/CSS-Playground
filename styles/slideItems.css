@@ -1,0 +1,20 @@
+.slide_container {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slide-wrapper {
+    display: flex;
+    width: 90vw;
+    gap: 1rem;
+    overflow: hidden;
+}
+
+
+.slide-item img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    background-position: center;
+}

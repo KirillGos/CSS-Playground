@@ -2,11 +2,10 @@
 .homepage-style {
   display: grid;
   align-items: center;
-  justify-content: end;
+  justify-items: center;
   grid-template-columns: repeat(1fr, 2);
   grid-template-rows: repeat(1fr, 3);
-  height: 300vh;
-  grid-row: 2/3;
+  gap: 3rem;
 }
 .home-page-description {
   color: #fff;
