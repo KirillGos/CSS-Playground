@@ -17,7 +17,8 @@ const mainPage = document.querySelector(".mainPage");
     links.forEach((link) => {
         link.addEventListener("click", () => handleLinkClick(link));
   });
-  HomePage();
+  document.querySelector(".header").style.display = "none";
+  Animations();
 })();
 
 function handleLinkClick(link) {
