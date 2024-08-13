@@ -1,6 +1,7 @@
 import "../../styles/tickTackToe.css";
 
 const htmlTemplate = `
+<div class="tick-tack-toe_container">
 <div class='display-message-wrapper'>
 <div class="display-mesage-ttt">
   <h1 class="display-message_mode_title"></h1>
@@ -15,20 +16,21 @@ const htmlTemplate = `
 <div class="tick-tack-toe_gameboard">
     ${createBoxes()}
 </div>
+</div>
 </div>`;
 let move = "You";
 let sign = "X";
-let draw  = false;
+let draw = false;
 const tickTack = [null, null, null, null, null, null, null, null, null];
 
 function tickTackClick(e) {
-  if (move !== 'You') return;
+  if (move !== "You") return;
   if (e.target.textContent == "") {
     const tickTackToeSignTitle = document.querySelector(".tick-tack-toe-sign");
     e.target.textContent = sign;
     let i = e.target.dataset.index;
     tickTack.splice(i, 1, sign);
-    if( checkForTickTackToeWinner()) {
+    if (checkForTickTackToeWinner()) {
       return;
     } else {
       sign = sign === "X" ? "O" : "X";
@@ -58,18 +60,20 @@ function checkForTickTackToeWinner() {
     if (tickTack[item[0] - 1] !== null) {
       if (tickTack[item[1] - 1] !== null) {
         if (tickTack[item[2] - 1] !== null) {
-          if(tickTack[item[0] - 1] === tickTack[item[1] - 1] &&
-          tickTack[item[0] - 1] === tickTack[item[2] - 1]) {
+          if (
+            tickTack[item[0] - 1] === tickTack[item[1] - 1] &&
+            tickTack[item[0] - 1] === tickTack[item[2] - 1]
+          ) {
             tickTackToeGameOver();
             win = true;
-          } 
-        } 
+          }
+        }
       }
     } else {
       win = false;
-      if(tickTack.every(checkDraw)) {
-        displayDraw(); 
-      } 
+      if (tickTack.every(checkDraw)) {
+        displayDraw();
+      }
     }
   });
   return win;
@@ -93,7 +97,7 @@ function displayDraw() {
   messageTitle.textContent = `Draw`;
   tickTack.map((item, index) => tickTack.splice(index, 1, null));
   draw = true;
-  move = 'You';
+  move = "You";
   win = false;
 }
 function tickTackToeGameOver() {
@@ -104,7 +108,7 @@ function tickTackToeGameOver() {
   messageTitle.textContent = `Winner is ${move == "You" ? "You" : "Robot"}`;
   tickTack.map((item, index) => tickTack.splice(index, 1, null));
   sign = "X";
-  move = 'You';
+  move = "You";
 }
 function checkDraw(item) {
   return item !== null;
@@ -113,7 +117,6 @@ function clearTTTBoard() {
   const areas = document.querySelectorAll(".tick-tack-toe_area");
   areas.forEach((item) => (item.textContent = ""));
 }
-
 
 function createBoxes() {
   let templateHtml = "";
@@ -131,8 +134,8 @@ function addEventToBoxes() {
   });
 }
 export default function TickTackToe() {
-  move = 'You';
-  const tickTackContainer = document.querySelector(".tick-tack-toe_container");
+  move = "You";
+  const tickTackContainer = document.querySelector(".tick-tack-game");
   tickTackContainer.innerHTML = htmlTemplate;
   addEventToBoxes();
 }
@@ -147,8 +150,8 @@ function randomMove() {
   setTimeout(() => {
     // loop through tickTack array to find the empty boxes
     let freeSpaces = [];
-     tickTack.forEach((item, index) => {
-      if ( item === null) {
+    tickTack.forEach((item, index) => {
+      if (item === null) {
         freeSpaces.push(index);
       }
     });
@@ -161,17 +164,17 @@ function randomMove() {
     const item = document.querySelector(`div[data-index='${randomPlace}']`);
     item.textContent = sign;
 
-    // check for a winner. This check winner function returns a boolean indicating the state of the game. If it's true we'll exit the function, if it's false we'll continue the game. To continue the game we'll need to change the move and the sign as well as we'll need to update the interface.  
-    if(checkForTickTackToeWinner()) {
+    // check for a winner. This check winner function returns a boolean indicating the state of the game. If it's true we'll exit the function, if it's false we'll continue the game. To continue the game we'll need to change the move and the sign as well as we'll need to update the interface.
+    if (checkForTickTackToeWinner()) {
       return;
     } else if (draw === false) {
       move = "You";
       displayMove.textContent = move;
       sign = sign === "X" ? "O" : "X";
-      const tickTackToeSignTitle = document.querySelector(".tick-tack-toe-sign");
+      const tickTackToeSignTitle = document.querySelector(
+        ".tick-tack-toe-sign"
+      );
       tickTackToeSignTitle.textContent = sign;
     }
-
-    console.log(randomPlace, freeSpaces, tickTack, item);
   }, 1000);
 }

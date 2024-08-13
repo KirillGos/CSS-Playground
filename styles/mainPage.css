@@ -1,21 +1,62 @@
 /* homepage */
 .homepage-style {
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  grid-template-columns: repeat(1fr, 2);
-  grid-template-rows: repeat(1fr, 3);
-  gap: 3rem;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
 }
+
+.left-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.sliders-buttons button {
+  position: absolute;
+  left: 40%;
+  top: 40%;
+  z-index: 100;
+  font-size: 2rem;
+}
+.up-button {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  transform: translateX(-100%);
+}
+
+.down-button {
+  transform: translateY(-100%);
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.right-slider {
+  width: 60%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  position: absolute;
+  transition: transform 0.5s ease-in-out;
+}
+
 .home-page-description {
   color: #fff;
   display: flex;
-  max-width: 50vw;
-  max-height: 50vh;
-  padding: 0 2rem ;
+  padding: 0 2rem;
   align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+.right-slider-item{
   height: 100%;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.5s ease-in-out;
 }
 .homepage-to-do-app_description h1,
 .homepage-css-power_description h1 {
@@ -26,28 +67,32 @@
 .homepage-to-do-app_description {
   justify-content: end;
 }
+
+.homepage-tick-tack-description {
+  background-color: red !important;
+}
+.homepage-to-do-app_description {
+  background-color: blue !important;
+}
+.homepage-css-power_description {
+  background-color: green !important;
+}
 .homepage-to-do,
 .homepage-css-power {
   align-self: center;
   justify-self: center;
 }
-.homepage-to-do-app_description {
-  grid-row: 2 / 3;
-  grid-column: 2  /3;
-}
-.homepage-css-power_description {
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-}
 .homepage-to-do {
-  grid-column: 1 / 2;
-  grid-row: 2 / 3;
+  background-color: pink;
 }
-.homepage-css-area {
-  grid-column: 2/ 3;
-  grid-row: 1 / 2;
+.homepage-css-power {
+  background-color: burlywood;
 }
-@media screen and (max-width: 700px) {
+.tick-tack-toe_container {
+  background-color: wheat;
+}
+
+/* @media screen and (max-width: 700px) {
   .homepage-style {
     text-align: center;
     display: flex;
@@ -124,4 +169,4 @@
     width: 80vw;
     height: 50vh;
   }
-}
+} */

@@ -16,6 +16,9 @@
   align-items: center;
   position: relative;
 }
+.tick-tack-game {
+  background-color: chartreuse;
+}
 .tick-tack-toe_description {
   color: #fff;
   display: flex;
