@@ -1,0 +1,22 @@
+.clock_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.short_stick {
+    width: 15px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: darkblue;
+}
+
+.long_stick {
+    width: 15px;
+    height: 75px;
+    background-color: wheat;
+    border-radius: 5px;
+
+    transform: rotateX(30deg);
+}
+

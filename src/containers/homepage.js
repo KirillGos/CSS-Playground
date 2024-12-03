@@ -2,6 +2,7 @@ import "../../styles/mainPage.css";
 import cssPower from "../components/cssPower.js";
 import TickTackToe from "../components/tickTack.js";
 import ToDoApp from "../components/toDoApp.js";
+import Clock from '../components/Clock.js';
 
 const mainPage = document.querySelector(".mainPage");
 const htmlTemplate = `
@@ -34,8 +35,17 @@ const htmlTemplate = `
       </p>
     </div>
   </div>
+   <div class="home-page-description homepage-clock_description">
+    <div class="clock_description">
+      <h1>Clock</h1>
+      <p>
+          It's always important to know what time it is. This clock will tell you exactly what time it is.
+      </p>
+    </div>
+  </div>
 </div>
 <div class="right-slider">
+<div class="clock-sec right-slider-item"></div>
 <div class="tick-tack-game right-slider-item"></div>
 <div class="homepage-to-do right-slider-item"></div>
 <div class="homepage-css-power right-slider-item"></div>
@@ -50,12 +60,12 @@ const htmlTemplate = `
 export default function HomePage() {
   mainPage.classList = "";
   mainPage.classList.add("homepage-style");
-
   mainPage.innerHTML = htmlTemplate;
   ToDoApp();
   TickTackToe();
   cssPower();
   slider();
+  Clock();
 }
 function slider() {
   const mainPage = document.querySelector(".homepage-style");

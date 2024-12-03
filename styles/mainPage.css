@@ -67,6 +67,9 @@
 .homepage-to-do-app_description {
   justify-content: end;
 }
+.homepage-clock_description {
+  background-color: rgb(27, 242, 185);
+}
 
 .homepage-tick-tack-description {
   background-color: red !important;
@@ -90,6 +93,18 @@
 }
 .tick-tack-toe_container {
   background-color: wheat;
+}
+
+/* clock */
+.clock-sec {
+  background-color: cadetblue;
+}
+
+.clock_container {
+  border: 1px solid black;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
 }
 
 /* @media screen and (max-width: 700px) {
